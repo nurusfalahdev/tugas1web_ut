@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracking Pengiriman</title>
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f8f6;
+        color: #1f2937;
+      }
+
+      .navbar-custom {
+        width: 100%;
+        height: 70px;
+        background-color: #198754;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .navbar-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .navbar-logo img {
+        width: 45px;
+        height: 45px;
+        object-fit: contain;
+      }
+
+      .navbar-menu {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .navbar-menu a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 6px;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .navbar-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+
+      .navbar-menu .btn-logout {
+        background-color: white;
+        color: #198754;
+        font-weight: bold;
+        margin-left: 5px;
+      }
+
+      .navbar-menu .btn-logout:hover {
+        background-color: #eeeeee;
+        color: #157347;
+      }
+
+      .tracking-container {
+        max-width: 700px;
+        margin: 40px auto;
+      }
+
+      .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+      }
+
+      .card-header {
+        font-weight: bold;
+      }
+
+      .info-card {
+        background: #7899d4;
+        color: white;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 25px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .info-card h5 {
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .info-card p {
+        margin: 3px 0;
+        font-size: 14px;
+      }
+
+      .badge-status {
+        background-color: #f4d58d;
+        color: #66552c;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        float: right;
+      }
+
+      .timeline-title {
+        margin-top: 30px;
+        margin-bottom: 20px;
+        color: #426b78;
+        font-weight: bold;
+      }
+
+      .timeline {
+        position: relative;
+        margin-left: 15px;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 7px;
+        top: 5px;
+        bottom: 5px;
+        width: 3px;
+        background-color: #b9d8cf;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 25px;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: 0;
+        top: 3px;
+        width: 17px;
+        height: 17px;
+        background-color: #8fc9b5;
+        border: 3px solid #f5f8fa;
+        border-radius: 50%;
+        z-index: 2;
+      }
+
+      .timeline-item.active .timeline-dot {
+        background-color: #f2c866;
+      }
+
+      .timeline-content {
+        background: white;
+        padding: 12px 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .timeline-content h6 {
+        margin: 0;
+        color: #426b78;
+        font-weight: bold;
+      }
+
+      .timeline-content p {
+        margin: 5px 0 0;
+        font-size: 13px;
+        color: #777;
+      }
+
+      .timeline-date {
+        font-size: 12px;
+        color: #999;
+      }
+
+      .info-do {
+        display: grid;
+        grid-template-columns: 130px 20px 1fr;
+        row-gap: 5px;
+        font-style: italic;
+        text-transform: capitalize;
+      }
+
+      .info-do .titik {
+        text-align: center;
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar-custom">
+      <div class="navbar-logo">
+        <img
+          src="assets/Universitas Terbuka (UT) Icon - Black - zonalogo.com.svg"
+          alt="Logo"
+        />
+        <span>SITTA</span>
+      </div>
+
+      <div class="navbar-menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="bahanajar.html">Informasi Bahan Ajar</a>
+        <a href="tracking.html">Tracking Pengiriman</a>
+        <a href="index.html" class="btn-logout">Logout</a>
+      </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="container tracking-container">
+      <!-- FORM PENCARIAN DO -->
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          Tracking Delivery Order
+        </div>
+
+        <div class="card-body">
+          <label for="nomorDO" class="form-label"> Nomor Delivery Order </label>
+
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="nomorDO"
+              placeholder="Masukkan nomor Delivery Order"
+            />
+
+            <button class="btn btn-success" type="button" onclick="cariDO()">
+              Cari
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- HASIL TRACKING -->
+      <div id="hasilTracking" style="display: none" class="mt-4">
+        <div class="card">
+          <div class="card-body">
+            <span id="status" class="badge bg-success mb-2"></span>
+            <h4 id="nama"></h4>
+
+            <div class="info-do">
+              <div>Nomor DO</div>
+              <div class="titik">:</div>
+              <div id="nomor"></div>
+
+              <div>Ekspedisi</div>
+              <div class="titik">:</div>
+              <div id="ekspedisi"></div>
+
+              <div>Tanggal Kirim</div>
+              <div class="titik">:</div>
+              <div id="tanggalkirim"></div>
+
+              <div>Paket</div>
+              <div class="titik">:</div>
+              <div id="paket"></div>
+
+              <div>Total</div>
+              <div class="titik">:</div>
+              <div id="total"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <div class="card-header bg-success text-white">Perjalanan Paket</div>
+          <div class="card-body">
+            <div id="timeline"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Data -->
+    <script src="js/data.js"></script>
+    <!-- JavaScript -->
+    <script src="js/tracking.js"></script>
+  </body>
+</html>

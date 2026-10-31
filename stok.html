@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f8f6;
+        color: #1f2937;
+      }
+      .navbar-custom {
+        width: 100%;
+        height: 70px;
+        background-color: #198754;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .navbar-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .navbar-logo img {
+        width: 45px;
+        height: 45px;
+        object-fit: contain;
+      }
+
+      .navbar-menu {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .navbar-menu a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 6px;
+        font-size: 15px;
+        transition: 0.2s;
+      }
+
+      .navbar-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+
+      .navbar-menu .btn-logout {
+        background-color: white;
+        color: #198754;
+        font-weight: bold;
+        margin-left: 5px;
+      }
+
+      .navbar-menu .btn-logout:hover {
+        background-color: #eeeeee;
+        color: #157347;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar-custom">
+      <div class="navbar-logo">
+        <img
+          src="assets/Universitas Terbuka (UT) Icon - Black - zonalogo.com.svg"
+          alt="Logo"
+        />
+        <span>SITTA</span>
+      </div>
+
+      <nav class="navbar-menu">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="bahanajar.html">Informasi Bahan Ajar</a>
+        <a href="tracking.html">Tracking Pengiriman</a>
+        <a href="#" class="btn-logout">Logout</a>
+      </nav>
+
+
+      
+    </nav>
+  </body>
+</html>
